@@ -54,9 +54,9 @@ for applicant in group.applicants:
         group.approve(applicant)
 
 ```
-##### Teardown when done with it
-
-```group.quit()```
+#### Teardown when done with it
+```group.quit()
+```
 
 
 ###needs a config file of following format to be saved as credentials.cfg
