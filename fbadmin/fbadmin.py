@@ -26,7 +26,7 @@ def login(configfile='credentials.cfg'):
     configfile -- path to configfile
     """
     em, pw = get_cred(configfile)
-    driver = webdriver.PhantomJS()
+    driver = webdriver.PhantomJS(service_args=['--load-images=no'])
     driver.set_window_size(1600, 900)
     driver.get('http://www.facebook.com')
     email = driver.find_element_by_id('email')
@@ -57,6 +57,26 @@ class Applicant(object):
         else:
             self.groupcount = 0
 
+
+
+
+
+class Member(object):
+    def __init__(self,name,url,member_since):
+        """
+        Member class
+        Attributes
+        self.name
+        self.url
+        self.member_since  "Added by X about T time ago"
+        """
+        self.name=name
+        self.url=url
+        self.member_since=member_since
+
+
+
+        
 
 class FBGroup(object):
 
@@ -113,6 +133,52 @@ class FBGroup(object):
         time.sleep(1)
         print 'approving', applicant.name
         return applicant.name
+
+    
+    def get_members(self):
+        """
+        this is a generator method that yields a list of Member objects every iteration.
+        changes page every iteration (delay > 3 secs).
+        example :
+        for page in group.get_members():
+            for member in page:
+                print member.name #prints member names one page at a time
+        """
+        self.driver.get(self.groupurl+'members')
+        count=0
+        more=True
+        while more:            
+            members=[Member(*self.parse_member(td)) for td in self.driver.find_elements_by_tag_name('td')[count:] if td.text]
+            count=len(members)
+            more=self.seemore()
+            yield members
+    
+    def seemore(self):
+        try:
+            button=self.driver.find_element_by_link_text('See More')
+            button.click()
+            time.sleep(3)
+            return True
+        except:
+            return False
+
+    def parse_member(self,container):
+        d=container.text.split('\n')
+        name=d[0]
+        member_since=d[-1]
+        url=container.find_element_by_link_text(name).get_attribute('href')
+        return name,url,member_since
+        
+    
+    def peak(self,url):
+        """returns the homepage html of url of user
+        Arguments
+        url -- url of user to peak at
+        """
+        self.driver.get(url)
+        return self.driver.page_source
+
+
 
     def quit(self):
         """Tear Down"""

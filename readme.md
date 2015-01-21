@@ -54,7 +54,22 @@ for applicant in group.applicants:
         group.approve(applicant)
 
 ```
-#### Teardown when done with it                  
+
+####Get members
+
+```
+for page in group.get_members():
+    for member in page:
+        print member.name #prints member names one page at a time
+```
+
+####Get source of member's homepage(for spam analysis)
+
+```
+html=group.peak(member.url)
+```
+
+####Teardown when done with it                  
 
 ```
 group.quit()
