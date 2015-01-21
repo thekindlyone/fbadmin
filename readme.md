@@ -2,22 +2,22 @@
 ## A python library to admin facebook groups that uses selenium and phantomjs behind the scenes
 
 ### Dependencies
-phantomjs                               
+####phantomjs                               
 Easiest way to install phantomjs is via ```npm```                    
 ```npm install phantomjs```                        
 
-selenium                                          
+####selenium                                          
 ```pip install selenium```
 
 ###Usage
-Login and instantiate FBgroup
+####Login and instantiate FBgroup
 
 ```
 from fbadmin import login,FBGroup
 group_url='https://www.facebook.com/groups/782652721814257/'
 group=FBGroup(login(),group_url)
 ```
-Print all applicants and the number of groups they are members of.                          
+####Print all applicants and the number of groups they are members of.                          
 
 ```
 for applicant in group.applicants:
@@ -44,7 +44,7 @@ Derrick Kearney 17
 
 ```
 
-Block if member of more than 100 groups and approve if member of less than 10 groups
+####Block if member of more than 100 groups and approve if member of less than 10 groups
 
 ```
 for applicant in group.applicants:
