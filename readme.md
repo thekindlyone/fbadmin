@@ -69,3 +69,5 @@ group.quit()
 email = malcolmreynolds@serenity.com
 password = youcanttaketheskyfromme
 ```
+
+Suggestions/Comments/Issues can be sent at dodo.dodder@gmail.com
