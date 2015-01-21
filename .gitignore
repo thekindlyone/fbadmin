@@ -55,3 +55,4 @@ target/
 
 #extra
 credentials.cfg
+ghostdriver.log

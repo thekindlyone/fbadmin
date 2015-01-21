@@ -31,25 +31,14 @@ def login():
     return driver
 
 class Applicant(object):
-    def __init__(self,container):
-        self.container=container
-        self.name,self.age,self.othergroupstext=tuple(container.text.split('\n')[1:4])
+    def __init__(self,name,age,othergroupstext,url):        
+        self.name,self.age,self.othergroupstext,self.url=name,age,othergroupstext,url
         match=re.search(r'\d+',self.othergroupstext)
         if match:
-            self.groupcount=match.group(0)
+            self.groupcount=int(match.group(0))
         else:
             self.groupcount=0
-        self.approvebutton=container.find_element_by_link_text('Approve')
-        self.blockbutton=container.find_element_by_link_text('Block')
-        self.url=self.container.find_element_by_link_text(self.name).get_attributes('href')
     
-    def block(self):
-        self.blockbutton.click()
-
-    def approve(self):
-        self.approvebutton.click()
-
-
 class FBGroup(object):
     def __init__(self,driver,groupurl):
         self.driver=driver
@@ -61,18 +50,31 @@ class FBGroup(object):
         blocks=self.driver.find_elements_by_link_text('Block')
         if blocks:
             containers=[block.find_element_by_xpath('../..') for block in blocks]
-            applicants=[Applicant(container) for container in containers]
+            applicants=[Applicant(*self.parse_applicant(container)) for container in containers]
             return applicants
         else:
             return None
+    
+    def parse_applicant(self,container):
+        name,age,othergroupstext=tuple(container.text.split('\n')[1:4])
+        url=container.find_element_by_link_text(name).get_attribute('href')
+        return name,age,othergroupstext,url
 
 
-group=FBGroup(login(),'https://www.facebook.com/groups/782652721814257/')
-for applicant in group.applicants:
-    print applicant.name,applicant.age,applicant.groupcount
-    if applicant.groupcount>50:
-        applicant.block()
-    elif applicant.groupcount<10:
-        applicant.approve()
+    def block(self,applicant):
+        self.driver.find_element_by_link_text(applicant.name).find_element_by_xpath('../../../..').find_element_by_link_text('Block').click()
         time.sleep(1)
-# r'\d+'
+        print 'blocking',applicant.name
+        return applicant.name
+
+    def approve(self,applicant):
+        self.driver.find_element_by_link_text(applicant.name).find_element_by_xpath('../../../..').find_element_by_link_text('Approve').click()
+        time.sleep(1)
+        print 'approving',applicant.name
+        return applicant.name
+
+    
+
+
+
+
