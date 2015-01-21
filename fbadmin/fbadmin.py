@@ -58,11 +58,9 @@ class Applicant(object):
             self.groupcount = 0
 
 
-
-
-
 class Member(object):
-    def __init__(self,name,url,member_since):
+
+    def __init__(self, name, url, member_since):
         """
         Member class
         Attributes
@@ -70,13 +68,10 @@ class Member(object):
         self.url
         self.member_since  "Added by X about T time ago"
         """
-        self.name=name
-        self.url=url
-        self.member_since=member_since
+        self.name = name
+        self.url = url
+        self.member_since = member_since
 
-
-
-        
 
 class FBGroup(object):
 
@@ -134,7 +129,6 @@ class FBGroup(object):
         print 'approving', applicant.name
         return applicant.name
 
-    
     def get_members(self):
         """
         this is a generator method that yields a list of Member objects every iteration.
@@ -144,41 +138,39 @@ class FBGroup(object):
             for member in page:
                 print member.name #prints member names one page at a time
         """
-        self.driver.get(self.groupurl+'members')
-        count=0
-        more=True
-        while more:            
-            members=[Member(*self.parse_member(td)) for td in self.driver.find_elements_by_tag_name('td')[count:] if td.text]
-            count=len(members)
-            more=self.seemore()
+        self.driver.get(self.groupurl + 'members')
+        count = 0
+        more = True
+        while more:
+            members = [Member(*self.parse_member(td))
+                       for td in self.driver.find_elements_by_tag_name('td')[count:] if td.text]
+            count = len(members)
+            more = self.seemore()
             yield members
-    
+
     def seemore(self):
         try:
-            button=self.driver.find_element_by_link_text('See More')
+            button = self.driver.find_element_by_link_text('See More')
             button.click()
             time.sleep(3)
             return True
         except:
             return False
 
-    def parse_member(self,container):
-        d=container.text.split('\n')
-        name=d[0]
-        member_since=d[-1]
-        url=container.find_element_by_link_text(name).get_attribute('href')
-        return name,url,member_since
-        
-    
-    def peak(self,url):
+    def parse_member(self, container):
+        d = container.text.split('\n')
+        name = d[0]
+        member_since = d[-1]
+        url = container.find_element_by_link_text(name).get_attribute('href')
+        return name, url, member_since
+
+    def peak(self, url):
         """returns the homepage html of url of user
         Arguments
         url -- url of user to peak at
         """
         self.driver.get(url)
         return self.driver.page_source
-
-
 
     def quit(self):
         """Tear Down"""
