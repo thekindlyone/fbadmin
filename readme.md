@@ -54,8 +54,10 @@ for applicant in group.applicants:
         group.approve(applicant)
 
 ```
-#### Teardown when done with it
-```group.quit()
+#### Teardown when done with it                  
+
+```
+group.quit()
 ```
 
 
