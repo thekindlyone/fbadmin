@@ -1,13 +1,63 @@
 #fbadmin
 ## A python library to admin facebook groups that uses selenium and phantomjs behind the scenes
 
-### Needs phantomjs installed.
+### Dependencies
+phantomjs                               
 Easiest way to install phantomjs is via ```npm```                    
 ```npm install phantomjs```                        
 
-look at blockobvious.py for an imoplementation example
+selenium                                          
+```pip install selenium```
 
-needs a config file of following format
+###Usage
+Login and instantiate FBgroup
+
+```
+from fbadmin import login,FBGroup
+group_url='https://www.facebook.com/groups/782652721814257/'
+group=FBGroup(login(),group_url)
+```
+Print all applicants and the number of groups they are members of.                          
+
+```
+for applicant in group.applicants:
+    print applicant.name,applicant.groupcount
+     
+Liviu Vs Ze'us 17
+Iliya Tamarkin 24
+Raj K Rana 21
+Royendgel Silberie 41
+Bishnu Prasad Chowdhury 27
+Taranjeet Galactus Singh 13
+Aws Al-Aisafa 4
+أحمد محمود محمد عبدالوهاب 49
+Lha Ckg 22
+Krishna Jha 10
+Bhavesh Nigam 48
+Jeevan Anand Anne 19
+Sai Sandeep 19
+Raga Tarun 25
+Tarun Tremendous 48
+Aakeem Coleman 37
+Bill Pearce 17
+Derrick Kearney 17
+
+```
+
+Block if member of more than 100 groups and approve if member of less than 10 groups
+
+```
+for applicant in group.applicants:
+    if applicant.groupcount>100:
+        group.block(applicant)
+    elif applicant.groupcount<=10:
+        group.approve(applicant)
+
+```
+
+
+
+###needs a config file of following format to be saved as credentials.cfg
 
 ```
 #This is the configuration file. Enter FB credentials here.
