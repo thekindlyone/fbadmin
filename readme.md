@@ -59,7 +59,7 @@ for applicant in group.applicants:
 ```
 group.quit()
 ```
-
+####Please look at the code for other functionality. There are docstrings.
 
 ###needs a config file of following format to be saved as credentials.cfg
 
