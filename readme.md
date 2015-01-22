@@ -22,7 +22,7 @@ Easiest way to install phantomjs is via ```npm```
 ```
 from fbadmin import login,FBGroup
 group_url='https://www.facebook.com/groups/782652721814257/'
-group=FBGroup(login(),group_url)
+group=FBGroup(login('path/to/credentials.cfg'),group_url)
 ```
 ####Print all applicants and the number of groups they are members of.                          
 
