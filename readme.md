@@ -1,13 +1,20 @@
 #fbadmin
 ## A python library to admin facebook groups that uses selenium and phantomjs behind the scenes
+[![Supported Python versions](https://pypip.in/py_versions/fbadmin/badge.svg)](https://pypi.python.org/pypi/<fbadmin>/)
+[![License](https://pypip.in/license/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
+[![Development Status](https://pypip.in/status/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
+
+#### Note: Thi library is under active development. Lots more to come. To update 
+
+```pip install -U --no-deps fbadmin```
 
 ### Dependencies
 ####phantomjs                               
 Easiest way to install phantomjs is via ```npm```                    
 ```npm install phantomjs```                        
 
-####selenium                                          
-```pip install selenium```
+####other dependencies and the package itself can be installed via pip                                          
+```pip install fbadmin```
 
 ###Usage
 ####Login and instantiate FBgroup
