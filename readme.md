@@ -4,7 +4,7 @@
 [![License](https://pypip.in/license/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
 [![Development Status](https://pypip.in/status/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
 
-#### Note: Thi library is under active development. Lots more to come. To update 
+#### Note: This library is under active development. Lots more to come. To update 
 
 ```pip install -U --no-deps fbadmin```
 

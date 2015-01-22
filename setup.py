@@ -6,7 +6,7 @@ try:
 except:
     description=''
 setup(name='fbadmin',
-      version='0.1.0.3',
+      version='0.1.0.4',
       description='A python library to automate facebook group administration',
       long_description=description,
       url='https://github.com/thekindlyone/fbadmin',
