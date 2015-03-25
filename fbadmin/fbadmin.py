@@ -45,7 +45,7 @@ class Applicant(object):
         Useful Attributes:
         self.name             Contains name of applicant
         self.age              Contains the 'joined facebook..ago' string. Check for 'month' in age or
-                               'year' in age to get an estimate of how old the account is. 
+                               'year' in age to get an estimate of how old the account is.
         self.othergroupstext  String containing the 'Member of X groups'. For printing purposes
         self.groupcount       Integer containing number of groups applicant is a member of
         self.url              FB URL of applicant
@@ -60,7 +60,7 @@ class Applicant(object):
 
 class Member(object):
 
-    def __init__(self, name, url, member_since):
+    def __init__(self, member_id, name, url, member_since):
         """
         Member class
         Attributes
@@ -68,6 +68,7 @@ class Member(object):
         self.url
         self.member_since  "Added by X about T time ago"
         """
+        self.member_id = member_id
         self.name = name
         self.url = url
         self.member_since = member_since
@@ -162,7 +163,14 @@ class FBGroup(object):
         name = d[0]
         member_since = d[-1]
         url = container.find_element_by_link_text(name).get_attribute('href')
-        return name, url, member_since
+        member_id = self.parse_id(container, name)
+        return member_id, name, url, member_since
+
+    def parse_id(self, container, name):
+        hovercard = container.find_element_by_link_text(name).get_attribute('data-hovercard')
+        regex_id = re.compile('php\?id=(\d*)')
+        member_id = regex_id.search(hovercard).group(1)
+        return member_id
 
     def peak(self, url):
         """returns the homepage html of url of user
