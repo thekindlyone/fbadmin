@@ -66,7 +66,7 @@ class Member(object):
         Attributes
         self.name
         self.url
-        self.member_since  "Added by X about T time ago"
+        self.member_since  "2015-01-15 09:53:03"
         """
         self.member_id = member_id
         self.name = name
@@ -161,10 +161,15 @@ class FBGroup(object):
     def parse_member(self, container):
         d = container.text.split('\n')
         name = d[0]
-        member_since = d[-1]
+        member_since = convert_epoch_to_timestamp_string(container.find_element_by_tag_name('abbr').get_attribute('data-utime'))
         url = container.find_element_by_link_text(name).get_attribute('href')
         member_id = self.parse_id(container, name)
         return member_id, name, url, member_since
+
+    def convert_epoch_to_timestamp_string(self, epoch):
+        t = datetime.datetime.fromtimestamp(float(epoch))
+        fmt = "%Y-%m-%d %H:%M:%S"
+        return t.strftime(fmt)
 
     def parse_id(self, container, name):
         hovercard = container.find_element_by_link_text(name).get_attribute('data-hovercard')
