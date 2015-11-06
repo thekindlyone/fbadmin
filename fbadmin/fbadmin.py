@@ -26,7 +26,8 @@ def login(configfile='credentials.cfg'):
     configfile -- path to configfile
     """
     em, pw = get_cred(configfile)
-    driver = webdriver.PhantomJS(service_args=['--load-images=no'])
+    service_args = ['--load-images=no', '--ignore-ssl-errors=true', '--ssl-protocol=any']
+    driver = webdriver.PhantomJS(service_args=service_args)
     driver.set_window_size(1600, 900)
     driver.get('http://www.facebook.com')
     email = driver.find_element_by_id('email')
