@@ -1,8 +1,8 @@
 #fbadmin
 ## A python library to admin facebook groups that uses selenium and phantomjs behind the scenes
-[![Supported Python versions](https://pypip.in/py_versions/fbadmin/badge.svg)](https://pypi.python.org/pypi/<fbadmin>/)
-[![License](https://pypip.in/license/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
-[![Development Status](https://pypip.in/status/fbadmin/badge.svg)](https://pypi.python.org/pypi/fbadmin/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/fbadmin.svg)](https://pypi.python.org/pypi/<fbadmin>/)
+[![License](https://img.shields.io/pypi/l/fbadmin.svg)](https://pypi.python.org/pypi/fbadmin/)
+[![Development Status](https://img.shields.io/pypi/status/fbadmin.svg)](https://pypi.python.org/pypi/fbadmin/)
 
 #### Note: This library is under active development. Lots more to come. To update 
 
